@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  Log4j Configuration                                                  -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+   <!-- ================================= -->
+   <!-- Preserve messages in a local file -->
+   <!-- ================================= -->
+
+   <!-- A time/date based rolling appender -->
+   <appender name="FILEERROR" class="org.apache.log4j.RollingFileAppender">
+       <!-- <param name="File" value="F:/DATA/error.log"/> -->
+      <param name="File" value="/ADC/adccrawlingimage/log/error.log"/>
+      <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+      <param name="Append" value="false"/>
+	  <param name="Threshold" value="ERROR"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+      </layout>
+   </appender>
+
+   <appender name="FILEINFO" class="org.apache.log4j.RollingFileAppender">
+      <!-- <param name="File" value="F:/DATA/info.log"/> -->
+      <param name="File" value="/ADC/adccrawlingimage/log/info.log"/>
+      <param name="Append" value="false"/>
+      <param name="Threshold" value="INFO"/>
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+      </layout>
+   </appender>
+   
+   <appender name="FILEDEBUG" class="org.apache.log4j.RollingFileAppender">
+      <!-- <param name="File" value="F:/DATA/debug.log"/>  -->
+      <param name="File" value="/ADC/adccrawlingimage/log/debug.log"/>
+      <param name="Append" value="false"/>
+      <param name="Threshold" value="DEBUG"/>
+      <!-- MaxBackupIndex 备份日志文件的个数（默认是1个）  -->
+      <param name="MaxBackupIndex" value="10"/>
+      <!-- MaxFileSize表示日志文件允许的最大字节数（默认是10M） -->
+      <!-- <param name="MaxFileSize" value="20480"/> -->
+      <layout class="org.apache.log4j.PatternLayout">
+         <param name="ConversionPattern" value="%d %-5p [%c] %m%n"/>
+      </layout>
+   </appender>
+   <!-- ============================== -->
+   <!-- Append messages to the console -->
+   <!-- ============================== -->
+
+   <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+      <param name="Target" value="System.out"/>
+      <param name="Threshold" value="INFO"/>
+
+      <layout class="org.apache.log4j.PatternLayout">
+         <!-- The default pattern: Date Priority [Category] Message\n -->
+         <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/>
+      </layout>
+   </appender>
+   
+   <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+
+   <!-- ======================= -->
+   <!-- Setup the Root category -->
+   <!-- ======================= -->
+	
+   
+   <root>
+   	  <appender-ref ref="FILEDEBUG"/>
+   	  <appender-ref ref="FILEERROR"/>
+   </root>
+	
+</log4j:configuration>

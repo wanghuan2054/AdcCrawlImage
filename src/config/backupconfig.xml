@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<backup>
+	<!-- windows Path Setting -->
+	<!--  datadir 表示数据文件路径 
+		  backupdir  表示备份文件路径 
+		 enbackupdir  表示备份En Dev文件路径	 
+	     backupfolderformat 表示备份文件目录,目录格式必须符合日期与字符串的转换格式 -->
+	
+<!-- 	<datadir>F:\data\Root</datadir>	
+    <backupdir>F:\data\trainingimage</backupdir>  
+	<backupfolderformat>yyyyMMdd</backupfolderformat> -->
+	<!--  maincode subcode * 代表不过滤
+	      若过滤code ，再对应code标签中添加code， 大小写都行
+	      -->
+	<maincode>*</maincode>   
+	<subcode>acsr2,ngse3,acsr3</subcode>
+   <!--  acsr2 sdsr2   p0 p1  dd  -->
+	<!-- Unix Path Setting -->
+	<!-- datadir 表示数据文件路径 
+		 backupdir  表示备份文件路径 
+		 enbackupdir  表示备份En Dev文件路径	 
+	     backupfolderformat 表示备份文件目录,目录格式必须符合日期与字符串的转换格式 -->
+	     
+	<datadir>/dfs/data/Data/Root</datadir> 
+    <backupdir>/ADC/trainingimage</backupdir> 
+	<backupfolderformat>yyyyMMdd</backupfolderformat>   
+	
+	<!-- 增量备份  Incrementalbackup
+	   begin 增量备份的开始时间   yyyyMMdd格式，默认0点
+	   end 增量备份的结束时间     yyyyMMdd格式，默认0点
+	   interval 从 begin - end 的Step 步长
+	   timeunit 步长的单位 ， 支持 M:表示月,D:表示天,H:表示小时   
+	   enabled  是否启用增量备份功能 , true:启用Incrementalbackup , false|others Value:启用OneBackup default config 
+	   tips:以下配置项大小写均可
+	-->
+	<Incrementalbackup>
+		<begin>20210115060000</begin>
+		  <end>20210122060000</end>
+		<enabled>true</enabled>   
+	</Incrementalbackup>
+	<!-- 一次备份 OneBackup  default config
+	   time 表示备份时间,需要和timeunit配合使用
+	   timeunit 表示备份时间单位,M:表示月,D:表示天,H:表示小时 
+	   默认使用 OneBackup 备份配置 
+	-->
+	<OneBackup>
+		<time>2</time>  <!-- time表示备份时间,需要和timeunit配合使用 -->
+		<timeunit>D</timeunit>  <!-- time示备份时间单位,M:表示月,D:表示天,H:表示小时 -->
+	</OneBackup>
+	
+	<!-- threadir 线程路径,相对于datadir的相对路径, 每个路径会独立的启动一个线程进行处理,因此要求各路径之间必须相对独立 
+	    1，如果下面不进行配置，就只有一个线程在跑。 
+		2，配置级别可以不一样， -->
+	<!-- 目前只针对 ACT l290j 和 SD l691j 两步工序的TMS 判级图片进行分类   -->>
+	<threadir>/on/image/bp/l490j</threadir>
+	<!-- <threadir>/on/image/bp/l691j</threadir>   -->
+
+</backup>
